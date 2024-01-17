@@ -1,0 +1,25 @@
+{
+    "name": "fillincode/robokassa",
+    "description": "Пакет для интеграции с робокассой",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Fillincode\\Robokassa\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Fillincode\\Robokassa\\RobokassaServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Fillincode",
+            "email": "info@1rank.ru"
+        }
+    ],
+    "minimum-stability": "stable"
+}
