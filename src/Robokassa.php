@@ -119,7 +119,7 @@ class Robokassa
 
         $md5 = md5($string);
 
-        Log::channel('robokassa')->debug('crc', [
+        Log::channel(config('robokassa.log_driver'))->debug('crc', [
             'string' => $string,
             'md5' => $md5,
         ]);
@@ -135,7 +135,7 @@ class Robokassa
             "&InvId=$this->inv_id&".
             //"Receipt=$this->urlencode_receipt&" .
             "Desc=$this->inv_desc&SignatureValue=$crc".($this->is_test ? '&IsTest=1' : '');
-        Log::channel('robokassa')->debug('Generated link: '.$link);
+        Log::channel(config('robokassa.log_driver'))->debug('Generated link: '.$link);
 
         return $link;
     }
@@ -151,7 +151,7 @@ class Robokassa
             ":$this->pass2"
         ));
 
-        Log::channel('robokassa')->debug('check', [
+        Log::channel(config('robokassa.log_driver'))->debug('check', [
             'in_crc' => $in_crc,
             'check_crc' => $check_crc,
             'string' => "$this->out_sum:$this->inv_id".//:{$this->receipt}".
