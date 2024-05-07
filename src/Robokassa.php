@@ -2,7 +2,6 @@
 
 namespace Fillincode\Robokassa;
 
-use Illuminate\Support\Facades\Log;
 use JsonException;
 
 class Robokassa
@@ -53,8 +52,8 @@ class Robokassa
         $debug['inv_desc'] = $inv_desc;
         $debug['sum'] = $sum;
 
-        Log::channel(config('robokassa.log_driver'))->debug('New robokassa obj:');
-        Log::channel(config('robokassa.log_driver'))->debug('debug', $debug);
+        Logger::log('New robokassa obj:');
+        Logger::log('debug', $debug);
     }
 
     public function setInvId(?string $inv_id): void
@@ -119,7 +118,7 @@ class Robokassa
 
         $md5 = md5($string);
 
-        Log::channel(config('robokassa.log_driver'))->debug('crc', [
+        Logger::log('crc', [
             'string' => $string,
             'md5' => $md5,
         ]);
@@ -135,7 +134,8 @@ class Robokassa
             "&InvId=$this->inv_id&".
             //"Receipt=$this->urlencode_receipt&" .
             "Desc=$this->inv_desc&SignatureValue=$crc".($this->is_test ? '&IsTest=1' : '');
-        Log::channel(config('robokassa.log_driver'))->debug('Generated link: '.$link);
+
+        Logger::log("Generated link: $link");
 
         return $link;
     }
@@ -151,7 +151,7 @@ class Robokassa
             ":$this->pass2"
         ));
 
-        Log::channel(config('robokassa.log_driver'))->debug('check', [
+        Logger::log('check', [
             'in_crc' => $in_crc,
             'check_crc' => $check_crc,
             'string' => "$this->out_sum:$this->inv_id".//:{$this->receipt}".

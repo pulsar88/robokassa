@@ -9,4 +9,6 @@ return [
     'is_test' => env('ROBOKASSA_TEST', true),
 
     'log_driver' => 'stack',
+
+    'log_during_testing' => false,
 ];

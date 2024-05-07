@@ -16,7 +16,7 @@ php artisan vendor:publish --provider="Fillincode\Robokassa\RobokassaServiceProv
 
 ## Config
 
-Нужно корректно указать имена переменных из env файла. Пакет логирует создание новых объектов класса, поэтому можно указать, какой канал будет использоваться
+Нужно корректно указать имена переменных из env файла. Пакет логирует создание новых объектов класса, поэтому можно указать, какой канал будет использоваться. А также можно указать, стоит ли логировать данные во время тестирования
 
 ```php
 [
@@ -28,6 +28,8 @@ php artisan vendor:publish --provider="Fillincode\Robokassa\RobokassaServiceProv
     'is_test' => env('ROBOKASSA_TEST', true),
     
     'log_driver' => 'stack',
+    
+    'log_during_testing' => false,
 ];
 ```
 
